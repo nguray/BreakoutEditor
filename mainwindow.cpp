@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -45,6 +46,69 @@ void MainWindow::on_actionExit_triggered()
 {
     //---------------------------------------------
     close();
+
+}
+
+
+void MainWindow::on_actionOpen_triggered()
+{
+    QString         fileName;
+    //----------------------------------------------------
+    QString currentDir = QDir::currentPath();
+
+    fileName = QFileDialog::getOpenFileName(this, tr("Open Level"),
+                                      fileName, tr("Text Files (*.txt)"));
+
+    if (!fileName.isNull()) {
+        //--
+        m_fileName = fileName;
+        //--
+        m_levelArea->LoadLevel(m_fileName);
+        //--
+        QDir dir(m_fileName);
+        fileName = dir.dirName();
+        //--
+        ui->statusbar->showMessage(fileName);
+    }
+
+}
+
+
+void MainWindow::on_actionSave_triggered()
+{
+    //---------------------------------------------
+    if (!m_fileName.isNull()) {
+        //--
+        m_levelArea->SaveLevel(m_fileName);
+    }
+    else {
+        on_actionSave_As_triggered();
+    }
+
+}
+
+
+void MainWindow::on_actionSave_As_triggered()
+{
+    QString		fileName;
+    //----------------------------------------------------
+
+    fileName = QFileDialog::getSaveFileName(this, tr("Save Level"),
+                                            fileName, tr("Text Files (*.txt)"));
+
+    if (!fileName.isNull()) {
+        //--
+        m_fileName = fileName;
+        //--
+        m_levelArea->SaveLevel(fileName);
+
+        //--
+        QDir dir(m_fileName);
+        fileName =  dir.dirName();
+        //--
+        ui->statusbar->showMessage(fileName);
+
+    }
 
 }
 

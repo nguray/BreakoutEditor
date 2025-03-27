@@ -22,10 +22,17 @@ public:
 
     RLevelArea		*m_levelArea;
     RBrickBar		*m_brickBar;
-    QImage			m_imgBricks;
+    QImage      m_imgBricks;
+    QString     m_fileName;
 
 private slots:
     void on_actionExit_triggered();
+
+    void on_actionOpen_triggered();
+
+    void on_actionSave_triggered();
+
+    void on_actionSave_As_triggered();
 
 private:
     Ui::MainWindow *ui;
