@@ -112,3 +112,14 @@ void MainWindow::on_actionSave_As_triggered()
 
 }
 
+
+void MainWindow::on_actionNew_triggered()
+{
+    //-------------------------------------------------------------
+    m_levelArea->initLevel();
+    m_levelArea->repaint();
+    //--
+    ui->statusbar->showMessage("");
+
+}
+

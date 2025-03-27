@@ -34,6 +34,8 @@ private slots:
 
     void on_actionSave_As_triggered();
 
+    void on_actionNew_triggered();
+
 private:
     Ui::MainWindow *ui;
 };
